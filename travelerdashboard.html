@@ -13,6 +13,31 @@ body{background:#f4f6f9}
 .logo{color:#c89b63;font-size:30px;font-weight:700;text-align:center;margin-bottom:25px}
 .sidebar a{display:flex;gap:10px;color:#fff;text-decoration:none;padding:14px;border-radius:10px;margin:8px 0}
 .sidebar a:hover,.sidebar a.active{background:#c89b63}
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:260px;
+    height:100vh;
+    background:#001d35;
+    padding:20px;
+    z-index:1000;
+    transition:.3s;
+}
+
+.main{
+    margin-left:260px;
+    padding:30px;
+}
+
+.menu-btn{
+    display:none;
+}
+
+.overlay{
+    display:none;
+}
+
 .main{margin-left:260px;padding:30px}
 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
 .btn{background:#001d35;color:#fff;text-decoration:none;padding:12px 18px;border-radius:30px}
@@ -24,10 +49,81 @@ th{background:#001d35;color:#fff}
 th,td{padding:12px;border-bottom:1px solid #eee}
 canvas{max-height:320px}
 .section{display:none}.section.active{display:block}
+@media(max-width:768px){
+
+.menu-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:fixed;
+    top:15px;
+    left:15px;
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:10px;
+    background:#001d35;
+    color:#fff;
+    font-size:22px;
+    cursor:pointer;
+    z-index:2000;
+}
+
+.sidebar{
+    left:-260px;
+}
+
+.sidebar.show{
+    left:0;
+}
+
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.5);
+    z-index:999;
+    display:none;
+}
+
+.overlay.show{
+    display:block;
+}
+
+.main{
+    margin-left:0;
+    padding:15px;
+}
+
+.top{
+    margin-top:70px;
+    flex-direction:column;
+    gap:15px;
+}
+
+.cards{
+    grid-template-columns:1fr;
+}
+
+.btn{
+    width:100%;
+    text-align:center;
+}
+
+.box{
+    overflow-x:auto;
+}
+}
 </style>
 </head>
 <body>
+<button class="menu-btn" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+</button>
 
+<div class="overlay" onclick="closeMenu()"></div>
 <div class="sidebar">
 <div class="logo">Traveler</div>
 <a href="#" class="active" onclick="showSection('overview')"><i class="fas fa-home"></i>Overview</a>
@@ -87,8 +183,24 @@ canvas{max-height:320px}
 
 <script>
 function showSection(id){
-document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
+
+document.querySelectorAll('.section')
+.forEach(s=>s.classList.remove('active'));
+
+document.getElementById(id)
+.classList.add('active');
+
+closeMenu();
+}
+
+function toggleMenu(){
+document.querySelector('.sidebar').classList.toggle('show');
+document.querySelector('.overlay').classList.toggle('show');
+}
+
+function closeMenu(){
+document.querySelector('.sidebar').classList.remove('show');
+document.querySelector('.overlay').classList.remove('show');
 }
 
 new Chart(document.getElementById('tripChart'),{
