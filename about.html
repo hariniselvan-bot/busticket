@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stackly </title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+/* HEADER */
+.header{
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:30px 80px;
+    z-index:1000;
+    transition:0.4s;
+    background:transparent;
+}
+
+.header.scrolled{
+    background:#000000;
+    box-shadow:0 8px 25px rgba(0,0,0,0.5);
+}
+
+/* LOGO */
+.logo img{
+
+    height:60px;
+
+    filter:
+    brightness(0)
+    saturate(100%)
+    invert(71%)
+    sepia(29%)
+    saturate(524%)
+    hue-rotate(348deg)
+    brightness(89%)
+    contrast(86%);
+}
+
+/* NAV DESKTOP */
+.nav{
+    display:flex;
+    gap:50px;
+    align-items:center;
+}
+
+.nav a{
+    text-decoration:none;
+    color:#fff;
+    font-size:18px;
+    transition:0.3s;
+}
+
+.nav a:hover,
+.nav .active{
+    color:#c89b63;
+}
+
+.nav a span{
+    font-size:12px;
+    margin-left:6px;
+}
+
+/* LOGIN BUTTON */
+.login-btn{
+    background:#c89b63;
+    color:white;
+    padding:10px 30px;
+    border-radius:30px;
+    border:2px solid white;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.login-btn:hover{
+    background:white;
+    color:#c89b63;
+}
+
+/* HAMBURGER */
+.hamburger{
+    display:none;
+    font-size:32px;
+    color:white;
+    cursor:pointer;
+}
+
+/* OVERLAY */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    background:rgba(0,0,0,0.5);
+    opacity:0;
+    visibility:hidden;
+    transition:0.3s;
+    z-index:999;
+}
+
+.overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+/* CLOSE BUTTON */
+.close-btn{
+    display:none;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+    .header{
+        padding:20px;
+    }
+
+    .logo img{
+        height:40px;
+    }
+
+    .nav{
+        position:fixed;
+        top:0;
+        right:-100%;
+        width:75%;
+        height:100vh;
+        background:#000000;
+        flex-direction:column;
+        align-items:flex-start;
+        padding:100px 30px;
+        gap:25px;
+        transition:0.4s ease;
+        z-index:1000;
+
+        transform:translateX(100%);
+        opacity:0;
+    }
+
+    .nav.active{
+        right:0;
+        transform:translateX(0);
+        opacity:1;
+    }
+
+    /* ANIMATION ITEMS */
+    .nav a{
+        opacity:0;
+        transform:translateX(30px);
+    }
+
+    .nav.active a{
+        opacity:1;
+        transform:translateX(0);
+        transition:0.4s;
+    }
+
+    .nav.active a:nth-child(2){ transition-delay:0.1s; }
+    .nav.active a:nth-child(3){ transition-delay:0.2s; }
+    .nav.active a:nth-child(4){ transition-delay:0.3s; }
+    .nav.active a:nth-child(5){ transition-delay:0.4s; }
+    .nav.active a:nth-child(6){ transition-delay:0.5s; }
+    .nav.active a:nth-child(7){ transition-delay:0.6s; }
+
+    /* MOBILE LOGIN */
+    .mobile-login{
+        margin-top:20px;
+        background:#c89b63;
+        padding:12px;
+        width:100%;
+        text-align:center;
+        border-radius:25px;
+        color:white;
+    }
+
+    .right{
+        display:none;
+    }
+
+    .hamburger{
+        display:block;
+    }
+
+    /* CLOSE BUTTON */
+    .close-btn{
+        display:block;
+        position:absolute;
+        top:20px;
+        right:20px;
+        font-size:28px;
+        color:white;
+        cursor:pointer;
+    }
+}
+.mobile-login{
+    display:none;
+}
+@media(max-width:900px){
+    .mobile-login{
+        display:block;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header" id="header">
+
+    <div class="logo">
+        <img src="logo.webp" alt="Stackly Logo">
+    </div>
+
+    <nav class="nav" id="nav">
+
+        <!-- CLOSE -->
+        <div class="close-btn" id="closeBtn">✕</div>
+
+        <a href="home.html">𝖧𝖮𝖬𝖤</a>
+        <a href="about.html" class="active">𝙰𝙱𝙾𝚄𝚃</a>
+        <a href="services.html">𝚂𝙴𝚁𝚅𝙸𝙲𝙴</a>
+        <a href="blog.html">𝙱𝙻𝙾𝙶 </a>
+        <a href="contact.html">𝙲𝙾𝙽𝚃𝙰𝙲𝚃</a>
+
+        <!-- MOBILE LOGIN -->
+        <a href="login.html" class="mobile-login">BOOK RIDE</a>
+
+    </nav>
+
+    <div class="right">
+        <a href="login.html" class="login-btn">BOOK RIDE</a>
+    </div>
+
+    <div class="hamburger" id="hamburger">☰</div>
+
+</header>
+
+<div class="overlay" id="overlay"></div>
+
+
+
+<script>
+const hamburger = document.getElementById("hamburger");
+const nav = document.getElementById("nav");
+const overlay = document.getElementById("overlay");
+const closeBtn = document.getElementById("closeBtn");
+
+hamburger.onclick = () => {
+    nav.classList.add("active");
+    overlay.classList.add("active");
+};
+
+overlay.onclick = closeMenu;
+closeBtn.onclick = closeMenu;
+
+function closeMenu(){
+    nav.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
+const header = document.getElementById("header");
+
+window.addEventListener("scroll", () => {
+    if(window.scrollY > 50){
+        header.classList.add("scrolled");
+    } else {
+        header.classList.remove("scrolled");
+    }
+});
+</script>
+<section class="about-hero">
+
+    <div class="about-overlay">
+
+        <div class="about-content">
+
+           
+
+            <h1>
+                Your Trusted
+                Travel Partner
+            </h1>
+
+            <p>
+                Providing safe, reliable and comfortable
+                transportation services across India with
+                premium travel experiences.
+            </p>
+
+            <div class="breadcrumb">
+                <a href="home.html">Home</a>
+                <span>/</span>
+                <span>About Us</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<style>
+    /* MOBILE FIX */
+@media(max-width:900px){
+/* height of mobile header */
+
+    .about-content h1{
+        font-size:42px;
+        line-height:1.2;
+    }
+
+    .about-content p{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    .breadcrumb{
+        margin-top:20px;
+    }
+}
+
+@media(max-width:480px){
+@media(max-width:900px){
+
+    .about-hero{
+        padding-top:100px;
+        height:100vh;
+    }
+
+    .about-content h1{
+        font-size:60px;
+        line-height:1;
+    }
+}
+
+@media(max-width:480px){
+
+    .about-hero{
+        padding-top:90px;
+        height:100vh;
+    }
+
+    .about-content h1{
+        font-size:70px;
+        line-height:0.95;
+    }
+
+    .about-content p{
+        font-size:16px;
+        margin-top:20px;
+    }
+}
+/* MOBILE FIX */
+@media(max-width:900px){
+
+    .header{
+        background:transparent !important;
+        box-shadow:none !important;
+        padding:20px;
+    }
+
+    .header.scrolled{
+        background:#000 !important;
+        box-shadow:0 8px 25px rgba(0,0,0,0.5) !important;
+    }
+@media(max-width:900px){
+
+    .about-hero{
+        min-height:100vh;
+        height:auto;
+        padding:120px 20px 60px;
+    }
+
+    .about-content h1{
+        font-size:clamp(50px,12vw,70px);
+        line-height:1;
+    }
+
+    .about-content p{
+        font-size:16px;
+        line-height:1.8;
+    }
+}
+
+@media(max-width:480px){
+
+    .about-hero{
+        min-height:100vh;
+        padding:100px 15px 50px;
+    }
+
+    .about-content h1{
+        font-size:clamp(45px,14vw,65px);
+        line-height:1;
+    }
+}
+    .about-hero{
+        margin-top:0;
+        height:70vh;
+    }
+
+    .about-content h1{
+        font-size:42px;
+        line-height:1.2;
+    }
+
+    .about-content p{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    .breadcrumb{
+        margin-top:20px;
+    }
+}
+
+@media(max-width:480px){
+
+    .about-hero{
+        height:60vh;
+    }
+
+    .about-content h1{
+        font-size:32px;
+    }
+
+    .about-content p{
+        font-size:14px;
+    }
+}
+    .about-content h1{
+        font-size:32px;
+    }
+
+    .about-content p{
+        font-size:14px;
+    }
+
+    .about-content span{
+        font-size:12px;
+        letter-spacing:2px;
+    }
+}
+    .about-hero{
+        height:75vh;
+    padding-top:120px; /* Add this */
+    background:
+    linear-gradient(
+    rgba(0,0,0,.65),
+    rgba(0,0,0,.65)),
+    url("https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1920");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+.about-content{
+    max-width:900px;
+    color:white;
+    padding:20px;
+}
+
+.about-content span{
+    color:#c89b63;
+    letter-spacing:4px;
+    font-size:14px;
+}
+
+.about-content h1{
+    font-size:80px;
+    margin:20px 0;
+    font-weight:800;
+}
+
+.about-content p{
+    max-width:700px;
+    margin:auto;
+    color:#ddd;
+    line-height:1.8;
+    font-size:18px;
+}
+
+.breadcrumb{
+    margin-top:30px;
+}
+
+.breadcrumb a{
+    color:#c89b63;
+    text-decoration:none;
+}
+
+.breadcrumb span{
+    margin:0 8px;
+}
+</style>
+<section class="our-story">
+
+    <div class="story-image">
+        <img src="about.webp" alt="Our Story Image">
+    </div>
+
+    <div class="story-content">
+
+        <span>OUR STORY</span>
+
+        <h2>
+            Connecting People Through
+            Better Travel Experiences
+        </h2>
+
+        <p>
+            Stackly Ticket was founded with a vision to make
+            bus travel simple, affordable and enjoyable.
+            Our mission is to provide seamless booking,
+            comfortable journeys and outstanding service.
+        </p>
+
+        <a href="contact.html">Contact Us</a>
+
+    </div>
+
+</section>
+<style>
+    .our-story{
+    padding:120px 8%;
+    display:flex;
+    align-items:center;
+    gap:80px;
+}
+
+.story-image,
+.story-content{
+    flex:1;
+}
+
+.story-image img{
+    width:100%;
+    border-radius:20px;
+}
+
+.story-content span{
+    color:#c89b63;
+    letter-spacing:4px;
+}
+
+.story-content h2{
+    font-size:55px;
+    margin:20px 0;
+    color:#001d35;
+}
+
+.story-content p{
+    color:#666;
+    line-height:1.9;
+}
+
+.story-content a{
+    display:inline-block;
+    margin-top:25px;
+    background:#c89b63;
+    color:white;
+    text-decoration:none;
+    padding:15px 35px;
+    border-radius:30px;
+}
+/* TABLET VIEW */
+@media(max-width:768px){
+
+    .our-story{
+        flex-direction:column;
+        gap:40px;
+        padding:80px 20px;
+    }
+
+    .story-content{
+        text-align:center;
+    }
+
+    .story-content h2{
+        font-size:38px;
+        line-height:1.3;
+    }
+
+    .story-content p{
+        font-size:15px;
+        line-height:1.8;
+    }
+
+    .story-content a{
+        padding:14px 30px;
+    }
+}
+
+/* MOBILE VIEW */
+@media(max-width:480px){
+
+    .our-story{
+        padding:60px 15px;
+        gap:30px;
+    }
+
+    .story-image img{
+        border-radius:15px;
+    }
+
+    .story-content span{
+        font-size:12px;
+        letter-spacing:2px;
+    }
+
+    .story-content h2{
+        font-size:28px;
+        margin:15px 0;
+    }
+
+    .story-content p{
+        font-size:14px;
+        line-height:1.7;
+    }
+
+    .story-content a{
+        width:100%;
+        max-width:220px;
+        text-align:center;
+        padding:14px;
+    }
+}
+</style>
+<section class="stats">
+
+    <div class="stat">
+        <h2>50K+</h2>
+        <p>Happy Travelers</p>
+    </div>
+
+    <div class="stat">
+        <h2>100+</h2>
+        <p>Routes</p>
+    </div>
+
+    <div class="stat">
+        <h2>500+</h2>
+        <p>Buses</p>
+    </div>
+
+    <div class="stat">
+        <h2>24/7</h2>
+        <p>Support</p>
+    </div>
+
+</section>
+<style>
+    .stats{
+    background:#001d35;
+    color:white;
+    padding:80px 8%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    text-align:center;
+}
+
+.stat h2{
+    font-size:60px;
+    color:#c89b63;
+}
+
+.stat p{
+    margin-top:10px;
+}
+/* TABLET */
+@media(max-width:768px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+        gap:40px;
+        padding:60px 20px;
+    }
+
+    .stat h2{
+        font-size:45px;
+    }
+
+    .stat p{
+        font-size:15px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:480px){
+
+    .stats{
+        grid-template-columns:1fr;
+        gap:30px;
+        padding:50px 20px;
+    }
+
+    .stat{
+        padding:20px;
+        border:1px solid rgba(255,255,255,0.1);
+        border-radius:15px;
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(5px);
+    }
+
+    .stat h2{
+        font-size:38px;
+        margin-bottom:8px;
+    }
+
+    .stat p{
+        font-size:14px;
+        letter-spacing:1px;
+    }
+}
+</style>
+<section class="why-about">
+
+    <div class="section-title">
+        <span>WHY STACKLY</span>
+        <h2>Why Choose Us</h2>
+    </div>
+
+    <div class="why-grid">
+
+        <div class="why-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Safe Travel</h3>
+        </div>
+
+        <div class="why-card">
+            <i class="fas fa-tags"></i>
+            <h3>Affordable Pricing</h3>
+        </div>
+
+        <div class="why-card">
+            <i class="fas fa-bus"></i>
+            <h3>Luxury Buses</h3>
+        </div>
+
+        <div class="why-card">
+            <i class="fas fa-clock"></i>
+            <h3>On-Time Service</h3>
+        </div>
+
+    </div>
+
+</section>
+<style>
+    .why-about{
+    padding:120px 8%;
+}
+
+.why-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+}
+
+.why-card{
+    background:#fff;
+    text-align:center;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+    transition:.4s;
+}
+
+.why-card:hover{
+    transform:translateY(-10px);
+}
+
+.why-card i{
+    font-size:45px;
+    color:#c89b63;
+    margin-bottom:20px;
+}
+/* TABLET VIEW */
+@media(max-width:768px){
+
+    .why-about{
+        padding:80px 20px;
+    }
+
+    .why-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:20px;
+    }
+
+    .why-card{
+        padding:30px 20px;
+    }
+
+    .why-card i{
+        font-size:38px;
+    }
+
+    .why-card h3{
+        font-size:18px;
+    }
+}
+
+/* MOBILE VIEW */
+@media(max-width:480px){
+
+    .why-about{
+        padding:60px 15px;
+    }
+
+    .why-grid{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .why-card{
+        padding:30px 20px;
+        border-radius:15px;
+    }
+
+    .why-card i{
+        font-size:35px;
+        margin-bottom:15px;
+    }
+
+    .why-card h3{
+        font-size:17px;
+    }
+}
+</style>
+
+<section class="travel-section fade-section">
+
+    <div class="travel-left">
+
+        <h1>
+            STACKLY TRAVEL
+            <span>WITH EASE</span>
+        </h1>
+
+        <p>
+            Affordable tickets for fast and comfortable
+            bus trips across India. Experience premium
+            travel with Stackly Ticket.
+        </p>
+
+        <a href="contact.html" class="read-btn">
+            READ MORE →
+        </a>
+
+    </div>
+
+    <div class="travel-center">
+
+        <img src="bus.webp" alt="Bus Ticket">
+
+    </div>
+
+    <div class="travel-right">
+
+        <div class="info-box">
+            <h3>TRANSPORT YOU CAN TRUST</h3>
+            <p>
+                Safe journeys, verified operators and
+                seamless booking experience.
+            </p>
+        </div>
+
+        <div class="info-box">
+            <h3>PREMIUM TRAVEL EXPERIENCE</h3>
+            <p>
+                Comfortable seats, modern buses and
+                affordable ticket pricing.
+            </p>
+        </div>
+
+        <a href="contact.html" class="schedule-btn">
+            VIEW SCHEDULE
+        </a>
+
+    </div>
+
+</section>
+<style>
+    .travel-section{
+    background:#f3f3f3;
+    padding:120px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:50px;
+    overflow:hidden;
+}
+
+/* LEFT */
+
+.travel-left{
+    flex:1;
+}
+
+.travel-left h1{
+    font-size:90px;
+    line-height:0.95;
+    color:#c89b63;
+    font-weight:800;
+}
+
+.travel-left h1 span{
+    display:block;
+    color:#001d35;
+}
+
+.travel-left p{
+    margin-top:30px;
+    font-size:22px;
+    line-height:1.7;
+    max-width:500px;
+    color:#001d35;
+}
+
+.read-btn{
+    display:inline-block;
+    margin-top:40px;
+    text-decoration:none;
+    color:#001d35;
+    font-weight:700;
+    transition:.3s;
+}
+
+.read-btn:hover{
+    color:#c89b63;
+}
+
+/* CENTER */
+
+.travel-center{
+    flex:1;
+    text-align:center;
+}
+
+.travel-center img{
+    width:100%;
+    max-width:500px;
+    animation:floatTicket 4s ease-in-out infinite;
+}
+
+/* RIGHT */
+
+.travel-right{
+    flex:1;
+}
+
+.info-box{
+    margin-bottom:50px;
+}
+
+.info-box h3{
+    color:#001d35;
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+.info-box p{
+    color:#5f6d79;
+    line-height:1.8;
+    font-size:18px;
+}
+
+.schedule-btn{
+    display:inline-block;
+    background:#c89b63;
+    color:#001d35;
+    text-decoration:none;
+    padding:18px 40px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.schedule-btn:hover{
+    background:#001d35;
+    color:white;
+}
+
+/* FLOAT ANIMATION */
+
+@keyframes floatTicket{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-20px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+/* FADE ANIMATION */
+
+.fade-section{
+    opacity:0;
+    transform:translateY(80px);
+    transition:all 1s ease;
+}
+
+.fade-section.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:991px){
+
+    .travel-section{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .travel-left h1{
+        font-size:55px;
+    }
+
+    .travel-left p{
+        margin:auto;
+        margin-top:20px;
+    }
+
+    .travel-center img{
+        max-width:300px;
+    }
+
+    .info-box{
+        margin-bottom:30px;
+    }
+}
+</style>
+<script>
+
+const sections = document.querySelectorAll('.fade-section');
+
+const observer = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+
+    });
+
+},{
+    threshold:0.2
+});
+
+sections.forEach(section=>{
+    observer.observe(section);
+});
+
+</script>
+<section class="bus-benefits">
+
+    <div class="benefits-left">
+
+        <span class="sub-title">OUR BENEFITS</span>
+
+        <h2>
+            <span>COMFORTABLE SEATS AND FACILITIES</span>
+            FOR YOUR PLEASANT AND
+            CONVENIENT JOURNEY
+        </h2>
+
+        <div class="benefit-grid">
+
+            <div class="benefit">
+                <i class="fas fa-wifi"></i>
+                <h3>FREE WIFI</h3>
+            </div>
+
+            <div class="benefit">
+                <i class="fas fa-tv"></i>
+                <h3>TV ZONE</h3>
+            </div>
+
+            <div class="benefit">
+                <i class="fas fa-mug-hot"></i>
+                <h3>HOT DRINKS</h3>
+            </div>
+
+            <div class="benefit">
+                <i class="fas fa-restroom"></i>
+                <h3>RESTROOM</h3>
+            </div>
+
+            <div class="benefit">
+                <i class="fas fa-plug"></i>
+                <h3>SOCKETS</h3>
+            </div>
+
+            <div class="benefit">
+                <i class="fas fa-snowflake"></i>
+                <h3>CLIMATE CONTROL</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="benefits-right">
+
+        <img src="family.webp" alt="Luxury Bus Seat">
+
+    </div>
+
+</section>
+<style>
+    .bus-benefits{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    min-height:650px;
+}
+
+/* LEFT SIDE */
+
+.benefits-left{
+    background:#002b3d;
+    padding:70px 60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+}
+
+/* Floating Gold Blob */
+
+.benefits-left::before{
+    content:'';
+    position:absolute;
+    width:280px;
+    height:280px;
+    background:rgba(200,155,99,.08);
+    border-radius:50%;
+    top:-120px;
+    left:-120px;
+    animation:floatBlob 8s infinite ease-in-out;
+}
+
+.sub-title{
+    color:#fff;
+    letter-spacing:6px;
+    font-size:13px;
+    margin-bottom:20px;
+    position:relative;
+    z-index:2;
+}
+
+.benefits-left h2{
+    color:#fff;
+    font-size:48px;
+    line-height:1.15;
+    font-weight:800;
+    margin-bottom:50px;
+    position:relative;
+    z-index:2;
+}
+
+.benefits-left h2 span{
+    color:#c89b63;
+    display:block;
+}
+
+/* BENEFITS */
+
+.benefit-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:40px 20px;
+    position:relative;
+    z-index:2;
+}
+
+.benefit{
+    text-align:center;
+    color:white;
+    transition:.4s;
+}
+
+.benefit:hover{
+    transform:translateY(-8px);
+}
+
+.benefit i{
+    font-size:36px;
+    color:#c89b63;
+    margin-bottom:15px;
+}
+
+.benefit h3{
+    font-size:16px;
+    font-weight:700;
+}
+
+/* RIGHT SIDE */
+
+.benefits-right{
+    overflow:hidden;
+    height:650px;
+}
+
+.benefits-right img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:1s;
+}
+
+.benefits-right:hover img{
+    transform:scale(1.06);
+}
+
+/* FLOATING ANIMATION */
+
+@keyframes floatBlob{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-25px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* TABLET */
+
+@media(max-width:991px){
+
+    .bus-benefits{
+        grid-template-columns:1fr;
+    }
+
+    .benefits-left{
+        padding:60px 30px;
+    }
+
+    .benefits-left h2{
+        font-size:38px;
+    }
+
+    .benefit-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .benefits-right{
+        height:450px;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .benefits-left h2{
+        font-size:30px;
+    }
+
+    .benefit-grid{
+        grid-template-columns:1fr;
+    }
+
+    .benefits-right{
+        height:350px;
+    }
+}
+</style>
+
+
+<section class="testimonial-section">
+
+    <div class="testimonial-header">
+
+        <div>
+            <span>TESTIMONIALS</span>
+            <h2>WHAT OUR CLIENTS SAY</h2>
+        </div>
+
+        <div class="testimonial-nav">
+            <button><i class="fas fa-arrow-left"></i></button>
+            <button><i class="fas fa-arrow-right"></i></button>
+        </div>
+
+    </div>
+
+    <div class="testimonial-grid">
+
+        <div class="testimonial-card">
+
+            <div class="quote">❝</div>
+
+            <p>
+                Booking with Stackly Ticket was incredibly easy.
+                The buses were clean, comfortable and arrived
+                on time. Highly recommended for frequent travelers.
+            </p>
+
+            <div class="client">
+
+                <img src="ppl4.webp" alt="Client Photo">
+
+                <h4>HARINI SELVAN</h4>
+
+            </div>
+
+        </div>
+
+        <div class="testimonial-card">
+
+            <div class="quote">❝</div>
+
+            <p>
+                Excellent customer support and premium travel
+                experience. The online booking process was
+                smooth and hassle-free.
+            </p>
+
+            <div class="client">
+
+                <img src="ppl2.webp" alt="Client Photo">
+
+                <h4>PATRICK STONE</h4>
+
+            </div>
+
+        </div>
+
+        <div class="testimonial-card">
+
+            <div class="quote">❝</div>
+
+            <p>
+                Affordable prices, luxury buses and great service.
+                Definitely my first choice whenever I travel
+                between cities.
+            </p>
+
+            <div class="client">
+
+                <img src="ppl1.webp" alt="Client Photo">
+
+                <h4>HUGO JAMES</h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<style>
+    .testimonial-section{
+    background:#f3f5f5;
+    padding:120px 8%;
+}
+
+.testimonial-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:60px;
+}
+
+.testimonial-header span{
+    letter-spacing:5px;
+    font-size:13px;
+    color:#001d35;
+}
+
+.testimonial-header h2{
+    margin-top:15px;
+    font-size:65px;
+    color:#001d35;
+    font-weight:800;
+}
+
+.testimonial-nav{
+    display:flex;
+    gap:20px;
+}
+
+.testimonial-nav button{
+    width:70px;
+    height:70px;
+    border:none;
+    border-radius:50%;
+    background:white;
+    cursor:pointer;
+    transition:.3s;
+    font-size:18px;
+}
+
+.testimonial-nav button:hover{
+    background:#c89b63;
+    color:white;
+}
+
+.testimonial-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.testimonial-card{
+    background:white;
+    padding:70px 40px;
+    text-align:center;
+    transition:.4s;
+}
+
+.testimonial-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+.quote{
+    font-size:80px;
+    color:#c89b63;
+    line-height:1;
+    margin-bottom:30px;
+}
+
+.testimonial-card p{
+    color:#001d35;
+    line-height:2;
+    font-size:20px;
+    font-style:italic;
+}
+
+.client{
+    margin-top:40px;
+}
+
+.client img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:15px;
+}
+
+.client h4{
+    color:#001d35;
+    font-size:18px;
+    font-weight:700;
+}
+
+/* animation */
+
+.testimonial-card{
+    opacity:0;
+    transform:translateY(60px);
+    animation:fadeUp .8s forwards;
+}
+
+.testimonial-card:nth-child(2){
+    animation-delay:.2s;
+}
+
+.testimonial-card:nth-child(3){
+    animation-delay:.4s;
+}
+
+@keyframes fadeUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* mobile */
+
+@media(max-width:991px){
+
+    .testimonial-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:30px;
+    }
+
+    .testimonial-header h2{
+        font-size:40px;
+    }
+
+    .testimonial-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <!-- Logo & About -->
+        <div class="footer-box">
+
+            <img src="logo.webp" alt="Stackly Logo" class="footer-logo">
+
+            <p>
+                Stackly Ticket provides safe, comfortable,
+                and affordable bus journeys across India.
+                Travel smarter with premium services.
+            </p>
+
+            <div class="social-icons">
+
+                <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+
+                <a href="404.html"><i class="fab fa-instagram"></i></a>
+
+                <a href="404.html"><i class="fab fa-linkedin-in"></i></a>
+
+                <a href="404.html"><i class="fab fa-youtube"></i></a>
+
+            </div>
+
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-box">
+
+            <h3>Quick Links</h3>
+
+            <a href="home.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+
+        </div>
+
+        <!-- Popular Routes -->
+        <div class="footer-box">
+
+            <h3>Popular Routes</h3>
+
+            <a href="contact.html">Chennai → Bangalore</a>
+            <a href="contact.html">Hyderabad → Chennai</a>
+            <a href="contact.html">Madurai → Chennai</a>
+            <a href="contact.html">Coimbatore → Bangalore</a>
+
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-box">
+
+            <h3>Contact Us</h3>
+
+            <p><i class="fas fa-phone"></i> +91 89397 99419</p>
+
+            <p><i class="fas fa-envelope"></i> support@stacklyticket.com</p>
+
+            <p><i class="fas fa-location-dot"></i> Chennai, Tamil Nadu</p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Stackly Ticket. All Rights Reserved.
+        </p>
+
+    </div>
+
+</footer>
+<style>
+    .footer{
+    background:#000;
+    color:white;
+    padding-top:80px;
+    position:relative;
+}
+
+.footer::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:3px;
+    background:#c89b63;
+}
+
+.footer-container{
+    width:90%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:50px;
+}
+
+.footer-logo{
+    height:70px;
+
+    filter:
+    brightness(0)
+    saturate(100%)
+    invert(71%)
+    sepia(29%)
+    saturate(524%)
+    hue-rotate(348deg)
+    brightness(89%)
+    contrast(86%);
+}
+
+.footer-box p{
+    color:#bbb;
+    line-height:1.8;
+    margin-top:20px;
+}
+
+.footer-box h3{
+    margin-bottom:25px;
+    color:#c89b63;
+}
+
+.footer-box a{
+    display:block;
+    text-decoration:none;
+    color:#bbb;
+    margin-bottom:15px;
+    transition:.3s;
+}
+
+.footer-box a:hover{
+    color:#c89b63;
+    padding-left:8px;
+}
+
+.social-icons{
+    margin-top:25px;
+    display:flex;
+    gap:15px;
+}
+
+.social-icons a{
+    width:45px;
+    height:45px;
+    background:#111;
+    border:1px solid #333;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#c89b63;
+    transition:.3s;
+}
+
+.social-icons a:hover{
+    background:#c89b63;
+    color:black;
+    transform:translateY(-5px);
+}
+
+.footer-bottom{
+    margin-top:60px;
+    text-align:center;
+    border-top:1px solid #222;
+    padding:25px;
+}
+
+.footer-bottom p{
+    color:#999;
+}
+
+@media(max-width:991px){
+
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .social-icons{
+        justify-content:center;
+    }
+}
+</style>

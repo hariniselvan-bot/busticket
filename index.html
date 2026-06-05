@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Loading...</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:
+linear-gradient(
+rgba(0,29,53,.95),
+rgba(0,29,53,.95)
+);
+overflow:hidden;
+}
+
+/* Logo */
+
+.logo{
+font-size:55px;
+font-weight:700;
+color:#c89b63;
+margin-bottom:20px;
+animation:pulse 2s infinite;
+}
+
+/* Loading Circle */
+
+.loader{
+width:90px;
+height:90px;
+border:8px solid rgba(255,255,255,.2);
+border-top:8px solid #c89b63;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-bottom:25px;
+}
+
+@keyframes spin{
+
+0%{
+transform:rotate(0deg);
+}
+
+100%{
+transform:rotate(360deg);
+}
+
+}
+
+@keyframes pulse{
+
+0%,100%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.08);
+}
+
+}
+
+h2{
+color:white;
+margin-bottom:10px;
+}
+
+p{
+color:#ddd;
+}
+
+/* Floating Glow */
+
+body::before{
+content:'';
+position:absolute;
+width:300px;
+height:300px;
+background:rgba(200,155,99,.15);
+border-radius:50%;
+top:-100px;
+left:-100px;
+filter:blur(50px);
+}
+
+body::after{
+content:'';
+position:absolute;
+width:250px;
+height:250px;
+background:rgba(255,255,255,.08);
+border-radius:50%;
+bottom:-100px;
+right:-100px;
+filter:blur(50px);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="logo">
+Stackly
+</div>
+
+<div class="loader"></div>
+
+<h2>Loading...</h2>
+
+<p>Please wait while we prepare your experience</p>
+
+<script>
+
+/* Redirect to Home Page */
+
+setTimeout(function(){
+
+window.location.href="home.html";
+
+},3000);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stackly </title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+/* HEADER */
+.header{
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:30px 80px;
+    z-index:1000;
+    transition:0.4s;
+    background:transparent;
+}
+
+.header.scrolled{
+    background:#000000;
+    box-shadow:0 8px 25px rgba(0,0,0,0.5);
+}
+
+/* LOGO */
+.logo img{
+
+    height:60px;
+
+    filter:
+    brightness(0)
+    saturate(100%)
+    invert(71%)
+    sepia(29%)
+    saturate(524%)
+    hue-rotate(348deg)
+    brightness(89%)
+    contrast(86%);
+}
+
+/* NAV DESKTOP */
+.nav{
+    display:flex;
+    gap:50px;
+    align-items:center;
+}
+
+.nav a{
+    text-decoration:none;
+    color:#fff;
+    font-size:18px;
+    transition:0.3s;
+}
+
+.nav a:hover,
+.nav .active{
+    color:#c89b63;
+}
+
+.nav a span{
+    font-size:12px;
+    margin-left:6px;
+}
+
+/* LOGIN BUTTON */
+.login-btn{
+    background:#c89b63;
+    color:white;
+    padding:10px 30px;
+    border-radius:30px;
+    border:2px solid white;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.login-btn:hover{
+    background:white;
+    color:#c89b63;
+}
+
+/* HAMBURGER */
+.hamburger{
+    display:none;
+    font-size:32px;
+    color:white;
+    cursor:pointer;
+}
+
+/* OVERLAY */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    background:rgba(0,0,0,0.5);
+    opacity:0;
+    visibility:hidden;
+    transition:0.3s;
+    z-index:999;
+}
+
+.overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+/* CLOSE BUTTON */
+.close-btn{
+    display:none;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+    .header{
+        padding:20px;
+    }
+
+    .logo img{
+        height:40px;
+    }
+
+    .nav{
+        position:fixed;
+        top:0;
+        right:-100%;
+        width:75%;
+        height:100vh;
+        background:#000000;
+        flex-direction:column;
+        align-items:flex-start;
+        padding:100px 30px;
+        gap:25px;
+        transition:0.4s ease;
+        z-index:1000;
+
+        transform:translateX(100%);
+        opacity:0;
+    }
+
+    .nav.active{
+        right:0;
+        transform:translateX(0);
+        opacity:1;
+    }
+
+    /* ANIMATION ITEMS */
+    .nav a{
+        opacity:0;
+        transform:translateX(30px);
+    }
+
+    .nav.active a{
+        opacity:1;
+        transform:translateX(0);
+        transition:0.4s;
+    }
+
+    .nav.active a:nth-child(2){ transition-delay:0.1s; }
+    .nav.active a:nth-child(3){ transition-delay:0.2s; }
+    .nav.active a:nth-child(4){ transition-delay:0.3s; }
+    .nav.active a:nth-child(5){ transition-delay:0.4s; }
+    .nav.active a:nth-child(6){ transition-delay:0.5s; }
+    .nav.active a:nth-child(7){ transition-delay:0.6s; }
+
+    /* MOBILE LOGIN */
+    .mobile-login{
+        margin-top:20px;
+        background:#c89b63;
+        padding:12px;
+        width:100%;
+        text-align:center;
+        border-radius:25px;
+        color:white;
+    }
+
+    .right{
+        display:none;
+    }
+
+    .hamburger{
+        display:block;
+    }
+
+    /* CLOSE BUTTON */
+    .close-btn{
+        display:block;
+        position:absolute;
+        top:20px;
+        right:20px;
+        font-size:28px;
+        color:white;
+        cursor:pointer;
+    }
+}
+.mobile-login{
+    display:none;
+}
+@media(max-width:900px){
+    .mobile-login{
+        display:block;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header" id="header">
+
+    <div class="logo">
+        <img src="logo.webp" alt="Stackly Logo">
+    </div>
+
+    <nav class="nav" id="nav">
+
+        <!-- CLOSE -->
+        <div class="close-btn" id="closeBtn">✕</div>
+
+        <a href="home.html">𝖧𝖮𝖬𝖤</a>
+        <a href="about.html">𝙰𝙱𝙾𝚄𝚃</a>
+        <a href="services.html" class="active">𝚂𝙴𝚁𝚅𝙸𝙲𝙴</a>
+        <a href="blog.html">𝙱𝙻𝙾𝙶 </a>
+        <a href="contact.html">𝙲𝙾𝙽𝚃𝙰𝙲𝚃</a>
+
+        <!-- MOBILE LOGIN -->
+        <a href="login.html" class="mobile-login">BOOK RIDE</a>
+
+    </nav>
+
+    <div class="right">
+        <a href="login.html" class="login-btn">BOOK RIDE</a>
+    </div>
+
+    <div class="hamburger" id="hamburger">☰</div>
+
+</header>
+
+<div class="overlay" id="overlay"></div>
+
+
+
+<script>
+const hamburger = document.getElementById("hamburger");
+const nav = document.getElementById("nav");
+const overlay = document.getElementById("overlay");
+const closeBtn = document.getElementById("closeBtn");
+
+hamburger.onclick = () => {
+    nav.classList.add("active");
+    overlay.classList.add("active");
+};
+
+overlay.onclick = closeMenu;
+closeBtn.onclick = closeMenu;
+
+function closeMenu(){
+    nav.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
+const header = document.getElementById("header");
+
+window.addEventListener("scroll", () => {
+    if(window.scrollY > 50){
+        header.classList.add("scrolled");
+    } else {
+        header.classList.remove("scrolled");
+    }
+});
+</script>
+<section class="about-hero">
+
+    <div class="about-overlay">
+
+        <div class="about-content">
+
+           
+
+            <h1>
+                Your Trusted
+                Travel Partner
+            </h1>
+
+            <p>
+                Providing safe, reliable and comfortable
+                transportation services across India with
+                premium travel experiences.
+            </p>
+
+            <div class="breadcrumb">
+                <a href="home.html">Home</a>
+                <span>/</span>
+                <span>SERVICE</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<style>
+    /* MOBILE FIX */
+@media(max-width:900px){
+/* height of mobile header */
+
+    .about-content h1{
+        font-size:42px;
+        line-height:1.2;
+    }
+
+    .about-content p{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    .breadcrumb{
+        margin-top:20px;
+    }
+}
+
+@media(max-width:480px){
+@media(max-width:900px){
+
+    .about-hero{
+        padding-top:100px;
+        height:100vh;
+    }
+
+    .about-content h1{
+        font-size:60px;
+        line-height:1;
+    }
+}
+
+@media(max-width:480px){
+
+    .about-hero{
+        padding-top:90px;
+        height:100vh;
+    }
+
+    .about-content h1{
+        font-size:70px;
+        line-height:0.95;
+    }
+
+    .about-content p{
+        font-size:16px;
+        margin-top:20px;
+    }
+}
+/* MOBILE FIX */
+@media(max-width:900px){
+
+    .header{
+        background:transparent !important;
+        box-shadow:none !important;
+        padding:20px;
+    }
+
+    .header.scrolled{
+        background:#000 !important;
+        box-shadow:0 8px 25px rgba(0,0,0,0.5) !important;
+    }
+@media(max-width:900px){
+
+    .about-hero{
+        min-height:100vh;
+        height:auto;
+        padding:120px 20px 60px;
+    }
+
+    .about-content h1{
+        font-size:clamp(50px,12vw,70px);
+        line-height:1;
+    }
+
+    .about-content p{
+        font-size:16px;
+        line-height:1.8;
+    }
+}
+
+@media(max-width:480px){
+
+    .about-hero{
+        min-height:100vh;
+        padding:100px 15px 50px;
+    }
+
+    .about-content h1{
+        font-size:clamp(45px,14vw,65px);
+        line-height:1;
+    }
+}
+    .about-hero{
+        margin-top:0;
+        height:70vh;
+    }
+
+    .about-content h1{
+        font-size:42px;
+        line-height:1.2;
+    }
+
+    .about-content p{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    .breadcrumb{
+        margin-top:20px;
+    }
+}
+
+@media(max-width:480px){
+
+    .about-hero{
+        height:60vh;
+    }
+
+    .about-content h1{
+        font-size:32px;
+    }
+
+    .about-content p{
+        font-size:14px;
+    }
+}
+    .about-content h1{
+        font-size:32px;
+    }
+
+    .about-content p{
+        font-size:14px;
+    }
+
+    .about-content span{
+        font-size:12px;
+        letter-spacing:2px;
+    }
+}
+    .about-hero{
+        height:75vh;
+    padding-top:120px; /* Add this */
+    background:
+    linear-gradient(
+    rgba(0,0,0,.65),
+    rgba(0,0,0,.65)),
+    url("https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1920");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+.about-content{
+    max-width:900px;
+    color:white;
+    padding:20px;
+}
+
+.about-content span{
+    color:#c89b63;
+    letter-spacing:4px;
+    font-size:14px;
+}
+
+.about-content h1{
+    font-size:80px;
+    margin:20px 0;
+    font-weight:800;
+}
+
+.about-content p{
+    max-width:700px;
+    margin:auto;
+    color:#ddd;
+    line-height:1.8;
+    font-size:18px;
+}
+
+.breadcrumb{
+    margin-top:30px;
+}
+
+.breadcrumb a{
+    color:#c89b63;
+    text-decoration:none;
+}
+
+.breadcrumb span{
+    margin:0 8px;
+}
+</style>
+<section class="service-cards">
+
+    <div class="card">
+        <i class="fas fa-bus"></i>
+        <h3>Luxury Buses</h3>
+        <p>Modern fleet with comfortable seating.</p>
+    </div>
+
+    <div class="card">
+        <i class="fas fa-ticket-alt"></i>
+        <h3>Easy Booking</h3>
+        <p>Fast and secure ticket reservations.</p>
+    </div>
+
+    <div class="card">
+        <i class="fas fa-route"></i>
+        <h3>Multiple Routes</h3>
+        <p>Connecting major cities across India.</p>
+    </div>
+
+    <div class="card">
+        <i class="fas fa-headset"></i>
+        <h3>24/7 Support</h3>
+        <p>Customer support whenever needed.</p>
+    </div>
+
+</section>
+<style>
+   
+    .service-cards{
+    padding:120px 8%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+}
+
+.card{
+    background:white;
+    padding:50px 30px;
+    text-align:center;
+    border-radius:20px;
+    transition:.5s;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card:hover{
+    transform:
+    translateY(-15px)
+    rotate(2deg);
+
+    box-shadow:
+    0 25px 50px rgba(0,0,0,.15);
+}
+
+.card i{
+    font-size:55px;
+    color:#c89b63;
+    margin-bottom:20px;
+    animation:iconFloat 3s infinite;
+}
+ @media(max-width:768px){
+
+    .service-cards{
+        grid-template-columns:repeat(2,1fr);
+        padding:80px 20px;
+        gap:20px;
+    }
+
+    .card{
+        padding:35px 20px;
+    }
+
+    .card i{
+        font-size:40px;
+    }
+}
+
+@media(max-width:480px){
+
+    .service-cards{
+        grid-template-columns:1fr;
+        padding:60px 15px;
+    }
+}
+</style>
+<section class="timeline">
+
+    <div class="step">
+        <span>01</span>
+        <h3>Select Route</h3>
+    </div>
+
+    <div class="step">
+        <span>02</span>
+        <h3>Choose Seat</h3>
+    </div>
+
+    <div class="step">
+        <span>03</span>
+        <h3>Payment</h3>
+    </div>
+
+    <div class="step">
+        <span>04</span>
+        <h3>Enjoy Journey</h3>
+    </div>
+
+</section>
+<style>
+
+    .timeline{
+    background:#001d35;
+    color:white;
+    padding:120px 8%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    text-align:center;
+}
+
+.step span{
+    font-size:80px;
+    color:#c89b63;
+}
+    @media(max-width:768px){
+
+    .timeline{
+        grid-template-columns:repeat(2,1fr);
+        gap:30px;
+        padding:80px 20px;
+    }
+
+    .step span{
+        font-size:55px;
+    }
+}
+
+@media(max-width:480px){
+
+    .timeline{
+        grid-template-columns:1fr;
+        gap:40px;
+        padding:60px 15px;
+    }
+
+    .step span{
+        font-size:45px;
+    }
+
+    .step h3{
+        font-size:18px;
+    }
+}
+</style>
+<section class="stats">
+
+<div class="stat">
+<h2>50K+</h2>
+<p>Happy Travelers</p>
+</div>
+
+<div class="stat">
+<h2>100+</h2>
+<p>Routes</p>
+</div>
+
+<div class="stat">
+<h2>500+</h2>
+<p>Buses</p>
+</div>
+
+<div class="stat">
+<h2>24/7</h2>
+<p>Support</p>
+</div>
+
+</section>
+<style>
+  
+    .stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+padding:100px 8%;
+background:#f8f8f8;
+text-align:center;
+}
+
+.stat h2{
+font-size:70px;
+color:#c89b63;
+}
+.fade-up{
+opacity:0;
+transform:translateY(80px);
+transition:1s;
+}
+
+.show{
+opacity:1;
+transform:none;
+}
+  @media(max-width:768px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+        gap:30px;
+        padding:70px 20px;
+    }
+
+    .stat h2{
+        font-size:45px;
+    }
+}
+
+@media(max-width:480px){
+
+    .stats{
+        grid-template-columns:1fr;
+        gap:25px;
+    }
+
+    .stat{
+        background:#fff;
+        padding:25px;
+        border-radius:15px;
+    }
+
+    .stat h2{
+        font-size:38px;
+    }
+}
+</style>
+<script>
+
+const sections =
+document.querySelectorAll(
+'.service-hero,.service-cards,.timeline,.stats'
+);
+
+const observer =
+new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add('show');
+
+}
+
+});
+
+});
+
+sections.forEach(section=>{
+observer.observe(section);
+});
+
+</script>
+
+<section class="bus-benefits">
+
+    <div class="benefits-left">
+
+        <span class="sub-title">OUR BENEFITS</span>
+
+        <h2>
+            <span>COMFORTABLE SEATS AND FACILITIES</span>
+            FOR YOUR PLEASANT AND
+            CONVENIENT JOURNEY
+        </h2>
+
+        <div class="benefit-grid">
+
+            <div class="benefit">
+                <i class="fas fa-wifi"></i>
+                <h3>FREE WIFI</h3>
+            </div>
+
+            <div class="benefit">
+                <i class="fas fa-tv"></i>
+                <h3>TV ZONE</h3>
+            </div>
+
+            <div class="benefit">
+                <i class="fas fa-mug-hot"></i>
+                <h3>HOT DRINKS</h3>
+            </div>
+
+            <div class="benefit">
+                <i class="fas fa-restroom"></i>
+                <h3>RESTROOM</h3>
+            </div>
+
+            <div class="benefit">
+                <i class="fas fa-plug"></i>
+                <h3>SOCKETS</h3>
+            </div>
+
+            <div class="benefit">
+                <i class="fas fa-snowflake"></i>
+                <h3>CLIMATE CONTROL</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="benefits-right">
+
+        <img src="family.webp" alt="Luxury Bus Seat">
+
+    </div>
+
+</section>
+<style>
+    .bus-benefits{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    min-height:650px;
+}
+
+/* LEFT SIDE */
+
+.benefits-left{
+    background:#002b3d;
+    padding:70px 60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+}
+
+/* Floating Gold Blob */
+
+.benefits-left::before{
+    content:'';
+    position:absolute;
+    width:280px;
+    height:280px;
+    background:rgba(200,155,99,.08);
+    border-radius:50%;
+    top:-120px;
+    left:-120px;
+    animation:floatBlob 8s infinite ease-in-out;
+}
+
+.sub-title{
+    color:#fff;
+    letter-spacing:6px;
+    font-size:13px;
+    margin-bottom:20px;
+    position:relative;
+    z-index:2;
+}
+
+.benefits-left h2{
+    color:#fff;
+    font-size:48px;
+    line-height:1.15;
+    font-weight:800;
+    margin-bottom:50px;
+    position:relative;
+    z-index:2;
+}
+
+.benefits-left h2 span{
+    color:#c89b63;
+    display:block;
+}
+
+/* BENEFITS */
+
+.benefit-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:40px 20px;
+    position:relative;
+    z-index:2;
+}
+
+.benefit{
+    text-align:center;
+    color:white;
+    transition:.4s;
+}
+
+.benefit:hover{
+    transform:translateY(-8px);
+}
+
+.benefit i{
+    font-size:36px;
+    color:#c89b63;
+    margin-bottom:15px;
+}
+
+.benefit h3{
+    font-size:16px;
+    font-weight:700;
+}
+
+/* RIGHT SIDE */
+
+.benefits-right{
+    overflow:hidden;
+    height:650px;
+}
+
+.benefits-right img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:1s;
+}
+
+.benefits-right:hover img{
+    transform:scale(1.06);
+}
+
+/* FLOATING ANIMATION */
+
+@keyframes floatBlob{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-25px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* TABLET */
+
+@media(max-width:991px){
+
+    .bus-benefits{
+        grid-template-columns:1fr;
+    }
+
+    .benefits-left{
+        padding:60px 30px;
+    }
+
+    .benefits-left h2{
+        font-size:38px;
+    }
+
+    .benefit-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .benefits-right{
+        height:450px;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .benefits-left h2{
+        font-size:30px;
+    }
+
+    .benefit-grid{
+        grid-template-columns:1fr;
+    }
+
+    .benefits-right{
+        height:350px;
+    }
+}
+</style>
+
+<section class="routes">
+
+    <div class="section-title">
+        <span>TOP DESTINATIONS</span>
+        <h2>Popular Routes</h2>
+    </div>
+
+    <div class="route-container">
+
+        <div class="route-card">
+            <img src="chennai.webp" alt="">
+            <div class="route-info">
+                <h3>Chennai → Bangalore</h3>
+                <p>Starting from ₹499</p>
+                <a href="contact.html">Book Now</a>
+            </div>
+        </div>
+
+        <div class="route-card">
+            <img src="hyderabad.webp" alt="">
+            <div class="route-info">
+                <h3>Hyderabad → Chennai</h3>
+                <p>Starting from ₹699</p>
+                <a href="contact.html">Book Now</a>
+            </div>
+        </div>
+
+        <div class="route-card">
+            <img src="coimbatore.webp" alt="">
+            <div class="route-info">
+                <h3>Coimbatore → Chennai</h3>
+                <p>Starting from ₹549</p>
+                <a href="contact.html">Book Now</a>
+            </div>
+        </div>
+
+        <div class="route-card">
+            <img src="bangalore.webp" alt="">
+            <div class="route-info">
+                <h3>Madurai → Bangalore</h3>
+                <p>Starting from ₹799</p>
+                <a href="contact.html">Book Now</a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<style>
+    @media(max-width:480px){
+
+    .routes{
+        padding:60px 15px;
+    }
+
+    .section-title h2{
+        font-size:30px;
+    }
+
+    .route-card img{
+        height:200px;
+    }
+
+    .route-info{
+        padding:20px;
+    }
+}
+.routes{
+    padding:100px 8%;
+    background:linear-gradient(
+        135deg,
+        #312f2f 0%,
+        #090909 100%
+    );
+    position:relative;
+    overflow:hidden;
+}
+
+/* Golden Circle Top Right */
+.routes::before{
+    content:'';
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:rgba(200,155,99,.08);
+    top:-150px;
+    right:-100px;
+}
+
+/* Golden Circle Bottom Left */
+.routes::after{
+    content:'';
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:rgba(200,155,99,.08);
+    bottom:-150px;
+    left:-100px;
+}.route-card{
+    position:relative;
+    z-index:2;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+    transition:.4s;
+}
+
+.route-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 50px rgba(200,155,99,.25);
+}.routes{
+    background:
+    radial-gradient(circle at top right,
+    rgba(200,155,99,.12),
+    transparent 25%),
+
+    radial-gradient(circle at bottom left,
+    rgba(200,155,99,.12),
+    transparent 25%),
+
+    #001d35;
+;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title span{
+    color:#c89b63;
+    letter-spacing:3px;
+    font-size:14px;
+}
+
+.section-title h2{
+    font-size:45px;
+    margin-top:10px;
+    color:#ffffff;
+}
+
+.route-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.route-card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:.4s;
+}
+
+.route-card:hover{
+    transform:translateY(-10px);
+}
+
+.route-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.route-info{
+    padding:25px;
+}
+
+.route-info h3{
+    margin-bottom:10px;
+    color:#111;
+}
+
+.route-info p{
+    color:#c89b63;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.route-info a{
+    display:inline-block;
+    text-decoration:none;
+    background:#c89b63;
+    color:white;
+    padding:12px 25px;
+    border-radius:30px;
+    transition:.3s;
+}
+
+.route-info a:hover{
+    background:#111;
+}
+</style>
+
+<section class="schedule-section">
+
+    <div class="schedule-title">
+        <span>DEPARTURE TIME</span>
+        <h2>Recent Schedule</h2>
+    </div>
+
+    <div class="schedule-header">
+
+        <div>Monday<br><small>01 JUN</small></div>
+        <div>Tuesday<br><small>02 JUN</small></div>
+        <div>Wednesday<br><small>03 JUN</small></div>
+        <div class="active-day">TODAY<br><small>05 JUN</small></div>
+        <div>Friday<br><small>06 JUN</small></div>
+        <div>Saturday<br><small>07 JUN</small></div>
+        <div>Sunday<br><small>08 JUN</small></div>
+
+    </div>
+
+    <div class="schedule-list">
+
+        <div class="schedule-card">
+
+            <div class="route">
+                <h3>📍 Chennai</h3>
+                <small>09:00 AM</small>
+            </div>
+
+            <div class="journey">
+                <span>6h 15m</span>
+            </div>
+
+            <div class="route">
+                <h3>📍 Bangalore</h3>
+                <small>03:15 PM</small>
+            </div>
+
+            <div class="price">
+                ₹499
+            </div>
+
+            <div class="seats">
+                41 Seats
+            </div>
+
+            <a href="contact.html">BUY TICKETS →</a>
+
+        </div>
+
+        <div class="schedule-card">
+
+            <div class="route">
+                <h3>📍 Hyderabad</h3>
+                <small>08:30 AM</small>
+            </div>
+
+            <div class="journey">
+                <span>9h 00m</span>
+            </div>
+
+            <div class="route">
+                <h3>📍 Chennai</h3>
+                <small>05:30 PM</small>
+            </div>
+
+            <div class="price">
+                ₹699
+            </div>
+
+            <div class="seats">
+                55 Seats
+            </div>
+
+            <a href="contact.html">BUY TICKETS →</a>
+
+        </div>
+
+        <div class="schedule-card">
+
+            <div class="route">
+                <h3>📍 Madurai</h3>
+                <small>10:00 AM</small>
+            </div>
+
+            <div class="journey">
+                <span>7h 20m</span>
+            </div>
+
+            <div class="route">
+                <h3>📍 Chennai</h3>
+                <small>05:20 PM</small>
+            </div>
+
+            <div class="price">
+                ₹549
+            </div>
+
+            <div class="seats">
+                38 Seats
+            </div>
+
+            <a href="contact.html">BUY TICKETS →</a>
+
+        </div>
+
+    </div>
+
+</section>
+<style>
+    
+    .schedule-section{
+    padding:100px 8%;
+    background:#f5f5f5;
+}
+
+.schedule-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.schedule-title span{
+    letter-spacing:4px;
+    color:#001d35;
+    font-size:12px;
+}
+
+.schedule-title h2{
+    font-size:55px;
+    color:#001d35;
+    margin-top:10px;
+}
+
+.schedule-header{
+    background:#001d35;
+    color:white;
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    text-align:center;
+}
+
+.schedule-header div{
+    padding:20px;
+    font-size:13px;
+}
+
+.active-day{
+    background:#c89b63;
+}
+
+.schedule-list{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.schedule-card{
+    background:white;
+    padding:25px;
+    display:grid;
+    grid-template-columns:1.2fr .8fr 1.2fr .7fr .7fr 1fr;
+    align-items:center;
+    gap:20px;
+    transition:.4s;
+}
+
+.schedule-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.route h3{
+    color:#001d35;
+    font-size:18px;
+}
+
+.route small{
+    color:#777;
+}
+
+.journey{
+    text-align:center;
+    color:#888;
+}
+
+.price{
+    font-size:22px;
+    font-weight:700;
+    color:#001d35;
+}
+
+.seats{
+    color:#666;
+}
+
+.schedule-card a{
+    background:#f5f5f5;
+    color:#001d35;
+    text-decoration:none;
+    text-align:center;
+    padding:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.schedule-card a:hover{
+    background:#c89b63;
+    color:white;
+}
+
+@media(max-width:991px){
+
+    .schedule-header{
+        display:none;
+    }
+
+    .schedule-card{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .schedule-title h2{
+        font-size:38px;
+    }
+}
+@media(max-width:768px){
+
+    .schedule-section{
+        padding:80px 20px;
+    }
+
+    .schedule-title h2{
+        font-size:34px;
+    }
+
+    .schedule-card{
+        padding:20px;
+        border-radius:15px;
+    }
+}
+
+@media(max-width:480px){
+
+    .schedule-section{
+        padding:60px 15px;
+    }
+
+    .schedule-title h2{
+        font-size:28px;
+    }
+
+    .schedule-card a{
+        width:100%;
+    }
+}
+</style>
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <!-- Logo & About -->
+        <div class="footer-box">
+
+            <img src="logo.webp" alt="Stackly Logo" class="footer-logo">
+
+            <p>
+                Stackly Ticket provides safe, comfortable,
+                and affordable bus journeys across India.
+                Travel smarter with premium services.
+            </p>
+
+            <div class="social-icons">
+
+                <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+
+                <a href="404.html"><i class="fab fa-instagram"></i></a>
+
+                <a href="404.html"><i class="fab fa-linkedin-in"></i></a>
+
+                <a href="404.html"><i class="fab fa-youtube"></i></a>
+
+            </div>
+
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-box">
+
+            <h3>Quick Links</h3>
+
+            <a href="home.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+
+        </div>
+
+        <!-- Popular Routes -->
+        <div class="footer-box">
+
+            <h3>Popular Routes</h3>
+
+            <a href="contact.html">Chennai → Bangalore</a>
+            <a href="contact.html">Hyderabad → Chennai</a>
+            <a href="contact.html">Madurai → Chennai</a>
+            <a href="contact.html">Coimbatore → Bangalore</a>
+
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-box">
+
+            <h3>Contact Us</h3>
+
+            <p><i class="fas fa-phone"></i> +91 89397 99419</p>
+
+            <p><i class="fas fa-envelope"></i> support@stacklyticket.com</p>
+
+            <p><i class="fas fa-location-dot"></i> Chennai, Tamil Nadu</p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Stackly Ticket. All Rights Reserved.
+        </p>
+
+    </div>
+
+</footer>
+<style>
+    .footer{
+    background:#000;
+    color:white;
+    padding-top:80px;
+    position:relative;
+}
+
+.footer::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:3px;
+    background:#c89b63;
+}
+
+.footer-container{
+    width:90%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:50px;
+}
+
+.footer-logo{
+    height:70px;
+
+    filter:
+    brightness(0)
+    saturate(100%)
+    invert(71%)
+    sepia(29%)
+    saturate(524%)
+    hue-rotate(348deg)
+    brightness(89%)
+    contrast(86%);
+}
+
+.footer-box p{
+    color:#bbb;
+    line-height:1.8;
+    margin-top:20px;
+}
+
+.footer-box h3{
+    margin-bottom:25px;
+    color:#c89b63;
+}
+
+.footer-box a{
+    display:block;
+    text-decoration:none;
+    color:#bbb;
+    margin-bottom:15px;
+    transition:.3s;
+}
+
+.footer-box a:hover{
+    color:#c89b63;
+    padding-left:8px;
+}
+
+.social-icons{
+    margin-top:25px;
+    display:flex;
+    gap:15px;
+}
+
+.social-icons a{
+    width:45px;
+    height:45px;
+    background:#111;
+    border:1px solid #333;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#c89b63;
+    transition:.3s;
+}
+
+.social-icons a:hover{
+    background:#c89b63;
+    color:black;
+    transform:translateY(-5px);
+}
+
+.footer-bottom{
+    margin-top:60px;
+    text-align:center;
+    border-top:1px solid #222;
+    padding:25px;
+}
+
+.footer-bottom p{
+    color:#999;
+}
+
+@media(max-width:991px){
+
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .social-icons{
+        justify-content:center;
+    }
+}
+</style>

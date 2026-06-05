@@ -1,0 +1,131 @@
+<section class="auth-page">
+
+    <div class="auth-card">
+
+        <h2>Create Account</h2>
+
+        <form id="signupForm">
+
+            <input
+            type="text"
+            placeholder="Full Name"
+            required>
+
+            <input
+            type="email"
+            placeholder="Email Address"
+            required>
+
+            <input
+            type="tel"
+            placeholder="Phone Number"
+            required>
+
+            <input
+            type="password"
+            placeholder="Password"
+            required>
+
+            <select required>
+                <option value="">Select Role</option>
+                <option>Traveler</option>
+            </select>
+
+            <button type="submit">
+                Sign Up
+            </button>
+
+            <p>
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</section>
+<style>
+    .auth-page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+    linear-gradient(
+    rgba(0,29,53,.9),
+    rgba(0,29,53,.9)),
+    url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1920');
+    background-size:cover;
+    position:relative;
+    overflow:hidden;
+}
+
+.auth-card{
+    width:450px;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(10px);
+    padding:45px;
+    border-radius:25px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+    animation:fadeUp 1s ease;
+}
+
+.auth-card h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#001d35;
+}
+
+.auth-card input,
+.auth-card select{
+    width:100%;
+    padding:15px;
+    margin-bottom:18px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+.auth-card input:focus,
+.auth-card select:focus{
+    outline:none;
+    border-color:#c89b63;
+    box-shadow:0 0 15px rgba(200,155,99,.25);
+}
+
+.auth-card button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:50px;
+    background:#c89b63;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.auth-card button:hover{
+    background:#001d35;
+}
+
+.auth-card p{
+    text-align:center;
+    margin-top:20px;
+}
+
+.auth-card a{
+    color:#c89b63;
+    text-decoration:none;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(50px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>

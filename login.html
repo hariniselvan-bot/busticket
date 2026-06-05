@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stackly Login</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+linear-gradient(rgba(0,29,53,.92),rgba(0,29,53,.92)),
+url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1920');
+background-size:cover;
+background-position:center;
+}
+
+.container{
+width:450px;
+background:#fff;
+padding:40px;
+border-radius:20px;
+box-shadow:0 20px 40px rgba(0,0,0,.2);
+}
+
+/* Back Button */
+
+.back-btn{
+display:inline-flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+color:#001d35;
+font-weight:600;
+margin-bottom:20px;
+transition:.3s;
+}
+
+.back-btn:hover{
+color:#c89b63;
+transform:translateX(-5px);
+}
+
+/* Tabs */
+
+.tabs{
+display:flex;
+background:#f1f1f1;
+border-radius:50px;
+overflow:hidden;
+margin-bottom:25px;
+}
+
+.tabs button{
+flex:1;
+padding:15px;
+border:none;
+cursor:pointer;
+font-weight:600;
+background:transparent;
+}
+
+.tabs button.active{
+background:#c89b63;
+color:#fff;
+}
+
+/* Forms */
+
+.form{
+display:none;
+}
+
+.form.active{
+display:block;
+}
+
+.form h2{
+text-align:center;
+margin-bottom:20px;
+color:#001d35;
+}
+
+.form input,
+.form select{
+width:100%;
+padding:14px;
+margin-bottom:18px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:15px;
+}
+
+/* Password Box */
+
+.password-box{
+position:relative;
+margin-bottom:18px;
+}
+
+.password-box input{
+width:100%;
+padding-right:50px;
+margin-bottom:0;
+}
+
+.password-box i{
+position:absolute;
+right:18px;
+top:50%;
+transform:translateY(-50%);
+cursor:pointer;
+color:#888;
+}
+
+.password-box i:hover{
+color:#c89b63;
+}
+
+/* Forgot Password */
+
+.forgot-wrap{
+text-align:right;
+margin-bottom:18px;
+}
+
+.forgot-wrap a{
+text-decoration:none;
+color:#c89b63;
+font-weight:600;
+}
+
+.forgot-wrap a:hover{
+color:#001d35;
+}
+
+/* Button */
+
+.form button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:50px;
+background:#c89b63;
+color:#fff;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+
+.form button:hover{
+background:#001d35;
+}
+
+/* Note */
+
+.role-note{
+text-align:center;
+margin-top:12px;
+color:#777;
+}
+
+@media(max-width:500px){
+
+.container{
+width:95%;
+padding:25px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="home.html" class="back-btn">
+<i class="fas fa-arrow-left"></i>
+Back To Home
+</a>
+
+<div class="tabs">
+
+<button class="active"
+onclick="showForm('login',event)">
+Login
+</button>
+
+<button
+onclick="showForm('signup',event)">
+Sign Up
+</button>
+
+</div>
+
+<!-- LOGIN -->
+
+<form class="form active" id="login">
+
+<h2>Welcome Back</h2>
+
+<input
+type="email"
+placeholder="Email Address"
+required>
+
+<div class="password-box">
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Password"
+required>
+
+<i class="fas fa-eye"
+id="toggleLoginPassword">
+</i>
+
+</div>
+
+<select id="role" required>
+
+<option value="">
+Select Role
+</option>
+
+<option value="admin">
+Admin
+</option>
+
+<option value="traveler">
+Traveler
+</option>
+
+</select>
+
+<div class="forgot-wrap">
+<a href="#" id="forgotPassword">
+Forgot Password?
+</a>
+</div>
+
+<button type="submit">
+Login
+</button>
+
+<p class="role-note">
+Choose Admin or Traveler
+</p>
+
+</form>
+
+<!-- SIGNUP -->
+
+<form class="form" id="signup">
+
+<h2>Create Account</h2>
+
+<input
+type="text"
+placeholder="Full Name"
+required>
+
+<input
+type="email"
+placeholder="Email Address"
+required>
+
+<input
+type="tel"
+placeholder="Phone Number"
+required>
+
+<div class="password-box">
+
+<input
+type="password"
+id="signupPassword"
+placeholder="Create Password"
+required>
+
+<i class="fas fa-eye"
+id="toggleSignupPassword">
+</i>
+
+</div>
+
+<select required>
+
+<option value="">
+Select Role
+</option>
+
+<option value="traveler">
+Traveler
+</option>
+
+</select>
+
+<button type="submit">
+Create Account
+</button>
+
+</form>
+
+</div>
+
+<script>
+
+function showForm(id,event){
+
+document
+.querySelectorAll('.form')
+.forEach(f=>f.classList.remove('active'));
+
+document
+.getElementById(id)
+.classList.add('active');
+
+document
+.querySelectorAll('.tabs button')
+.forEach(b=>b.classList.remove('active'));
+
+event.target.classList.add('active');
+
+}
+
+function toggle(id,icon){
+
+const p =
+document.getElementById(id);
+
+const i =
+document.getElementById(icon);
+
+if(p.type==='password'){
+
+p.type='text';
+i.classList.replace('fa-eye','fa-eye-slash');
+
+}else{
+
+p.type='password';
+i.classList.replace('fa-eye-slash','fa-eye');
+
+}
+
+}
+
+/* LOGIN PASSWORD */
+
+document
+.getElementById('toggleLoginPassword')
+.onclick=()=>toggle(
+'loginPassword',
+'toggleLoginPassword'
+);
+
+/* SIGNUP PASSWORD */
+
+document
+.getElementById('toggleSignupPassword')
+.onclick=()=>toggle(
+'signupPassword',
+'toggleSignupPassword'
+);
+
+/* FORGOT PASSWORD */
+
+document
+.getElementById('forgotPassword')
+.onclick=(e)=>{
+
+e.preventDefault();
+
+const email =
+prompt(
+'Enter your registered email address'
+);
+
+if(email){
+
+alert(
+'Password reset link sent to ' +
+email
+);
+
+}
+
+};
+
+/* LOGIN */
+
+document
+.getElementById('login')
+.addEventListener('submit',function(e){
+
+e.preventDefault();
+
+const role =
+document.getElementById('role').value;
+
+if(role==='admin'){
+
+window.location.href =
+'admindashboard.html';
+
+}
+
+else if(role==='traveler'){
+
+window.location.href =
+'travelerdashboard.html';
+
+}
+
+});
+
+/* SIGNUP */
+
+document
+.getElementById('signup')
+.addEventListener('submit',function(e){
+
+e.preventDefault();
+
+alert(
+'Account Created Successfully!'
+);
+
+window.location.href =
+'home.html';
+
+});
+
+</script>
+
+</body>
+</html>
